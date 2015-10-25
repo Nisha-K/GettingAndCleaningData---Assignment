@@ -27,4 +27,12 @@ trainData<-cbind(subject_train, Y_train, X_train)
 data <- rbind(testData,trainData)
 
 #Calculating mean and standard deviation
+meanId <- grep("mean",names(data),ignore.case=TRUE)
+stdDevId <- grep("std",names(data),ignore.case=TRUE)
+meanName <- names(data)[meanId]
+stdDevName <- names(data)[stdDevId]
+meanStdDev <-data[,c("SubjectID","Label",meanName,stdDevName)]
+head(meanStdDev)
 
+## Create new tidy dataset
+write.table(meanStdDev,"./tidy_data.txt",row.name=FALSE)
